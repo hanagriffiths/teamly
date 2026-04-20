@@ -8,17 +8,18 @@ router.post("/ask", async (req, res) => {
         typeof req.body?.query === "string" ? req.body.query : undefined;
 
     if (!query) {
-        return res.status(400).json({
-            error: "Query is required.",
-        });
+        return res.status(400).json({ ok: false, error: "Query is required." });
     }
 
     try {
-        const response = await askAI(query);
-        res.json(response);
+        const result = await askAI(query);
+        if (result.ok) {
+            return res.json(result);
+        }
+        return res.status(502).json(result);
     } catch (error) {
         console.error("Error asking AI:", error);
-        throw error;
+        return res.status(500).json({ ok: false, error: "Internal server error." });
     }
 });
 

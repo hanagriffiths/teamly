@@ -77,8 +77,8 @@ function filterDates(formattedQuery: string): DateRange {
         return { start: today.subtract(3, "day"), end: today };
     }
     
-    // fallback to the most recent week
-    return { start: today.subtract(7, "day"), end: today };
+    // fallback to recent month
+    return { start: today.subtract(1, "month"), end: today };
 }
 
 export default function logFilter(query: string): { selectedLogs: Log[], selectedEmployees: Employee[] } {

@@ -15,7 +15,7 @@ app.use(express.json());
 // });
 
 // Routes
-app.use("/ai", aiRoutes);
+app.use("/api", aiRoutes);
 
 // Health check
 app.get("/health", (_req, res) => {
