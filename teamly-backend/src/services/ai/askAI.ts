@@ -1,24 +1,25 @@
 import { Anthropic } from "@anthropic-ai/sdk";
 import { employees } from "../../data/employees";
-import { logs } from "../../data/logs";
+// import { logs } from "../../data/logs";
 
-const formattedLogs = logs.map(log => 
-    `${log.date} | ${log.employeeId} | mood: ${log.mood} | hours: ${log.hoursOnline} | tasksCompleted: ${log.tasksCompleted} | meetings: ${log.meetings}`
-).join("\n");
+// const formattedLogs = logs.map(log => 
+//     `${log.date} | ${log.employeeId} | mood: ${log.mood} | hours: ${log.hoursOnline} | tasksCompleted: ${log.tasksCompleted} | meetings: ${log.meetings}`
+// ).join("\n");
+import logFilter from "./logFilter";
 
 async function askAI(query: string): Promise<object> {
     const anthropic = new Anthropic({
         apiKey: process.env.ANTHROPIC_API_KEY,
     });
 
+    const filteredData = logFilter(query);
+    console.log(filteredData);
+
     const prompt = `
     You are an HR analytics assistant.
 
-    EMPLOYEE DATA:
-    ${JSON.stringify(employees, null, 2)}
-
-    LOGS:
-    ${JSON.stringify(formattedLogs, null, 2)}
+    DATA:
+    ${JSON.stringify(filteredData, null, 2)}
 
     Question: ${query}
 

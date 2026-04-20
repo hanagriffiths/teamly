@@ -1,4 +1,15 @@
-export const logs = [
+export type Log = {
+    employeeId: string,
+    date: string,
+    mood: number,
+    hoursOnline: number,
+    tasksCompleted: number,
+    meetings: number
+}
+
+export const TODAY = "2026-04-14";
+
+export const logs: Array<Log> = [
     // WEEK 1
 
     // Sarah (stable, slight dip mid-week)
