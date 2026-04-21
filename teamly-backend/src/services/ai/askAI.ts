@@ -1,5 +1,6 @@
 import { Anthropic } from "@anthropic-ai/sdk";
 import logFilter from "./logFilter";
+import { getNameFromId } from "../../utils/getNameFromId";
 
 type RiskLevel = "low" | "medium" | "high";
 type AIResponse = {
@@ -7,8 +8,7 @@ type AIResponse = {
     insights: string[];
     risk_level: RiskLevel;
 };
-
-export type AskAIResult =
+type AskAIResult =
     | { ok: true; data: AIResponse }
     | { ok: false; error: string };
 
@@ -18,13 +18,30 @@ async function askAI(query: string): Promise<AskAIResult> {
     });
 
     const filteredData = logFilter(query);
+    const filteredLogs = filteredData.selectedLogs;
+
+    const formattedLogs = filteredLogs.map(log => {
+        const employeeName = getNameFromId(log.employeeId);
+
+        return `
+        Employee daily activity log:
+        - Date: ${log.date}
+        - Name: ${employeeName}
+        - Mood Score : ${log.mood} out of 10
+        - Hours worked online: ${log.hoursOnline}
+        - Tasks completed: ${log.tasksCompleted}
+        - Number of meetings: ${log.meetings}
+        `.trim();
+    });
+    console.log(formattedLogs);
+
 
     const prompt = `
     You are an HR analytics assistant.
     Return only valid JSON and do NOT wrap it in markdown or backticks.
 
     DATA:
-    ${JSON.stringify(filteredData, null, 2)}
+    ${JSON.stringify(formattedLogs, null, 2)}
 
     Question: ${query}
 
