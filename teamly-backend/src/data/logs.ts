@@ -9,7 +9,7 @@ export type Log = {
 
 export const TODAY = "2026-04-14";
 
-export const logs: Array<Log> = [
+export const logs: Log[] = [
     // WEEK 1
 
     // Sarah (stable, slight dip mid-week)

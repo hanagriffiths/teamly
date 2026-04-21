@@ -1,6 +1,12 @@
 import { Anthropic } from "@anthropic-ai/sdk";
 import logFilter from "./logFilter";
-import { getNameFromId } from "../../utils/getNameFromId";
+import { getEmbedding, getEmbeddings } from "./embedding";
+import { logToText } from "../../utils/logToText";
+import { cosineSimilarity } from "../../utils/cosineSimilarity";
+
+const anthropic = new Anthropic({
+    apiKey: process.env.ANTHROPIC_API_KEY,
+});
 
 type RiskLevel = "low" | "medium" | "high";
 type AIResponse = {
@@ -13,28 +19,45 @@ type AskAIResult =
     | { ok: false; error: string };
 
 async function askAI(query: string): Promise<AskAIResult> {
-    const anthropic = new Anthropic({
-        apiKey: process.env.ANTHROPIC_API_KEY,
-    });
-
     const filteredData = logFilter(query);
     const filteredLogs = filteredData.selectedLogs;
 
-    const formattedLogs = filteredLogs.map(log => {
-        const employeeName = getNameFromId(log.employeeId);
+    const candidates = filteredLogs.map(log => ({
+        log,
+        text: logToText(log)
+    }));
 
-        return `
-        Employee daily activity log:
-        - Date: ${log.date}
-        - Name: ${employeeName}
-        - Mood Score : ${log.mood} out of 10
-        - Hours worked online: ${log.hoursOnline}
-        - Tasks completed: ${log.tasksCompleted}
-        - Number of meetings: ${log.meetings}
-        `.trim();
-    });
-    console.log(formattedLogs);
+    if (candidates.length === 0) {
+        console.error("Candidates array is empty.")
+        return {
+            ok: false,
+            error: "No matching logs for the given query/ date range."
+        };
+    }
 
+    const embeddedQuery = await getEmbedding(query);
+
+    const candidateTexts = candidates.map(c => c.text);
+    const embeddings = await getEmbeddings(candidateTexts);
+
+    const embeddedLogs = candidates.map((candidate, i) => ({
+        text: candidate.text,
+        embedding: embeddings[i],
+        metadata: {
+            employeeId: candidate.log.employeeId,
+            date: candidate.log.date,
+        },
+        original: candidate.log,
+    }))
+
+    // sort from highest to lowest
+    const rankedLogs = embeddedLogs.map(log => ({
+        ...log,
+        score: cosineSimilarity(embeddedQuery, log.embedding)
+    })).sort((a, b) => b.score - a.score);
+
+    const topLogs = rankedLogs.slice(0, 5);
+    const formattedLogs = topLogs.map(log => log.text);
 
     const prompt = `
     You are an HR analytics assistant.

@@ -4,7 +4,7 @@ dayjs.extend(isSameOrAfter);
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 dayjs.extend(isSameOrBefore)
 
-import { employees, Employee } from "../../data/employees";
+import { employees } from "../../data/employees";
 import { logs, Log, TODAY } from "../../data/logs";
 
 /**
@@ -81,7 +81,7 @@ function filterDates(formattedQuery: string): DateRange {
     return { start: today.subtract(1, "month"), end: today };
 }
 
-export default function logFilter(query: string): { selectedLogs: Log[], selectedEmployees: Employee[] } {
+export default function logFilter(query: string): { selectedLogs: Log[] } {
     const formattedQuery: string = query.toLowerCase().trim();
     const matchedEmployees: Set<string> = filterNames(formattedQuery);
     const dateRange: DateRange = filterDates(formattedQuery);
@@ -92,9 +92,5 @@ export default function logFilter(query: string): { selectedLogs: Log[], selecte
         return logDate.isSameOrAfter(dateRange.start) && logDate.isSameOrBefore(dateRange.end) && matchedEmployees.has(log.employeeId);
     })
 
-    const filteredEmployees: Employee[] = employees.filter(employee => {
-        return matchedEmployees.has(employee.id);
-    })
-
-    return { selectedLogs: filteredLogs, selectedEmployees: filteredEmployees }
+    return { selectedLogs: filteredLogs }
 }
