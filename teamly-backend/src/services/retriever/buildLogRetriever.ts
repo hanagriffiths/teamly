@@ -1,7 +1,7 @@
 import { Document } from "@langchain/core/documents";
 import { Log } from "../../data/logs";
 import { logToText } from "../../utils/logToText";
-import { getEmbedding, getEmbeddings } from "../embedding";
+import { getEmbedding, getEmbeddings } from "../embedding/embedding";
 import { cosineSimilarity } from "../../utils/cosineSimilarity";
 
 const K = 5;

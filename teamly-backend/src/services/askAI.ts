@@ -1,4 +1,4 @@
-import logFilter from "./logFilter";
+import logFilter from "./processing/logFilter";
 import { buildChain } from "./chains/buildChain";
 
 async function askAI(query: string, userId: string) {
