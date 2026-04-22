@@ -1,7 +1,7 @@
 import logFilter from "./logFilter";
 import { buildChain } from "./chains/buildChain";
 
-async function askAI(query: string) {
+async function askAI(query: string, userId: string) {
     const filteredLogs = logFilter(query).selectedLogs;
 
     if (!filteredLogs?.length) {
@@ -13,7 +13,7 @@ async function askAI(query: string) {
 
     const chain = await buildChain(filteredLogs);
 
-    return await chain.invoke(query);
+    return await chain.invoke(query, userId);
 }
 
 export default askAI;

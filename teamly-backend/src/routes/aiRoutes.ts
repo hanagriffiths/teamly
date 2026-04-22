@@ -7,12 +7,15 @@ router.post("/ask", async (req, res) => {
     const query =
         typeof req.body?.query === "string" ? req.body.query : undefined;
 
-    if (!query) {
-        return res.status(400).json({ ok: false, error: "Query is required." });
+    const userId =
+        typeof req.body?.userId === "string" ? req.body.userId : undefined;
+
+    if (!query || !userId) {
+        return res.status(400).json({ ok: false, error: "query and userId are required." });
     }
 
     try {
-        const result = await askAI(query);
+        const result = await askAI(query, userId);
         if (result.ok) {
             return res.json(result);
         }

@@ -1,3 +1,7 @@
+import { addToMemory, clearMemory, getTrimmedMemory } from "../memory/memoryService";
+import { Message } from "../types/message";
+import { HumanMessage, AIMessage } from "@langchain/core/messages";
+
 type HrChainDeps = {
     retriever: any;
     prompt: any;
@@ -13,6 +17,16 @@ function extractText(content: any): string {
     return "";
 }
 
+// format messages in line with Langchain stds
+function formatMessages(messages: Message[]) {
+    return messages.map(message => {
+        if (message.role === "user") {
+            return new HumanMessage(message.content);
+        }
+        return new AIMessage(message.content);
+    })
+}
+
 export function createHrAnalyticsChain({
     retriever,
     prompt,
@@ -20,8 +34,9 @@ export function createHrAnalyticsChain({
     parser,
 }: HrChainDeps) {
     return {
-        async invoke(query: string) {
+        async invoke(query: string, userId: string) {
             const retrievedDocs = await retriever.getRelevantDocuments(query);
+            const history = getTrimmedMemory(userId)
 
             const formattedPrompt = await prompt.format({
                 query: query,
@@ -31,6 +46,7 @@ export function createHrAnalyticsChain({
                     2
                 ),
                 format_instructions: parser.getFormatInstructions(),
+                chat_history: formatMessages(history)
             });
 
             try {
@@ -46,7 +62,10 @@ export function createHrAnalyticsChain({
         
                 // parse and validate with Langchain
                 const parsed = await parser.parse(text);
-        
+
+                addToMemory(userId, { role: "user", content: "query" });
+                addToMemory(userId, { role: "assistant", content: parsed.summary });
+
                 return {
                     ok: true,
                     data: parsed,

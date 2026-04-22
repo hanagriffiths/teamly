@@ -4,6 +4,9 @@ export const hrAnalyticsPrompt = ChatPromptTemplate.fromTemplate(`
     You are an HR analytics assistant.
     Return only valid JSON and do NOT wrap it in markdown or backticks.
 
+    CHAT HISTORY:
+    {chat_history}
+
     DATA:
     {data}
 
