@@ -4,8 +4,8 @@ dayjs.extend(isSameOrAfter);
 import isSameOrBefore from "dayjs/plugin/isSameOrBefore";
 dayjs.extend(isSameOrBefore)
 
-import { employees } from "../../data/employees";
-import { logs, Log, TODAY } from "../../data/logs";
+import { employees } from "../data/employees";
+import { logs, Log, TODAY } from "../data/logs";
 
 /**
  * Function to check whether the query explicitly mentions any employees by name.

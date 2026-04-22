@@ -1,5 +1,5 @@
 import express from "express";
-import askAI from "../services/ai/askAI";
+import askAI from "../services/askAI";
 
 const router = express.Router();
 
