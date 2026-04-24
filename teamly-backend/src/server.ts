@@ -1,5 +1,7 @@
 import express from "express";
+import cors from "cors";
 import aiRoutes from "./routes/aiRoutes";
+import dataRoutes from "./routes/dataRoutes";
 import dotenv from "dotenv";
 dotenv.config();
 
@@ -8,14 +10,17 @@ const port = Number(process.env.PORT) || 3000;
 
 app.use(express.json());
 
-// debugging
-// app.use((req, res, next) => {
-//   console.log("Incoming request:", req.method, req.url);
-//   next();
-// });
+// CORS security policy
+app.use(cors({
+  origin: ["http://localhost:5173", "http://localhost:4173"],    // for DEV and BUILD
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+  credentials: true
+}));
 
 // Routes
 app.use("/api", aiRoutes);
+app.use("/data", dataRoutes);
 
 // Health check
 app.get("/health", (_req, res) => {
