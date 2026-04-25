@@ -84,7 +84,7 @@ const Chat = ({
                         <input
                             className="w-full outline-none"
                             type='text'
-                            placeholder='What can I help you with today?'
+                            placeholder='Who is most at risk of burnout in the last 7 days?'
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             aria-label="Please enter the user query."
