@@ -1,10 +1,12 @@
+import type { FiltersProps } from "../../types";
+
 const Filters = ({
     title,
     allOptionTitle,
     options,
     selectedOption,
     setSelectedOption,
-}) => {
+}: FiltersProps) => {
     const toggleOption = (id: string) => {
         // for time ranges, don't allow multi-select option
         if (id[0] === "t") {
@@ -20,7 +22,7 @@ const Filters = ({
         // remove selection on double click
         // otherwise add to array
         // if this resets the selection to zero, default back to all
-        if (selectedOption.includes(id)) {
+        if (typeof selectedOption === "object" && selectedOption.includes(id)) {
             const updated = selectedOption.filter(e => e !== id);
             setSelectedOption(updated.length ? updated : "all");
         } else {

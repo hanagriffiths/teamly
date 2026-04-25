@@ -4,12 +4,13 @@ import { getSummaryStats } from "../../utils/summaryStats";
 import { ActivityBarChart } from "./ActivityChart";
 import MoodChart from "./MoodChart";
 import StatCard from "../reusable/StatCard";
+import type { AnalyticsProps } from "../../types";
 
 const AnalyticsPanel = ({
     selectedEmployees,
     selectedTimeRange,
     logs
-}) => {
+}: AnalyticsProps) => {
     const logStats = getSummaryStats(logs);
 
     const getEmployeeNames = () => {

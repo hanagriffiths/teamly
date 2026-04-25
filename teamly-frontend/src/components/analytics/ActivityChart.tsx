@@ -8,8 +8,9 @@ import {
 } from "recharts";
 import { employees } from "../../constants/employees";
 import { getActivityPerEmployee } from "../../utils/activityOverTime";
-  
-export function ActivityBarChart({ logs }) {
+import type { ChartProps } from "../../types";
+
+export function ActivityBarChart({ logs }: ChartProps) {
   const data = getActivityPerEmployee(logs);
 
   const employeeMap = Object.fromEntries(
@@ -32,7 +33,7 @@ export function ActivityBarChart({ logs }) {
           <YAxis width={40} />
           <Tooltip
             formatter={(
-              value: number,
+              value: number | undefined,
               name: string,
               props: any
             ) => [

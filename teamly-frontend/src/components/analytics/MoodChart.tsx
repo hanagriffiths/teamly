@@ -9,10 +9,11 @@ import {
 } from "recharts";
 import { getMoodOverTime } from "../../utils/moodOverTime";
 import { employees } from "../../constants/employees";
+import type { ChartProps } from "../../types";
 
 const COLOURS = ["#8884d8", "#2791F5", "#ff7f7f"];
 
-function MoodChart({ logs }) {
+function MoodChart({ logs }: ChartProps) {
     const data = getMoodOverTime(logs);
 
     const employeeIds = [...new Set(logs.map(l => l.employeeId))] as string[];
@@ -31,7 +32,7 @@ function MoodChart({ logs }) {
                     <XAxis dataKey="date" />
                     <YAxis domain={[0, 10]} width={30} />
                     <Tooltip
-                        formatter={(value: string, name: string) => [
+                        formatter={(value: string | undefined, name: string) => [
                             value,
                             employeeMap[name as string] || name
                         ]}

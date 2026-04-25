@@ -1,12 +1,12 @@
 import { PiSidebarSimpleThin } from "react-icons/pi";
-import { teamlyIcon } from "../assets/images";
+import { teamlyIcon } from "../../assets/images";
 import { PiNotePencilThin } from "react-icons/pi";
 import { TbCircleLetterTFilled } from "react-icons/tb";
 
-import Filters from "./reusable/Filters";
-import { employees } from "../constants/employees";
-import { timeRanges } from "../constants/timeRanges";
-
+import Filters from "../reusable/Filters";
+import { employees } from "../../constants/employees";
+import { timeRanges } from "../../constants/timeRanges";
+import type { NavBarProps } from "../../types";
 
 const NavBar = ({
     openSidebar,
@@ -16,7 +16,7 @@ const NavBar = ({
     setSelectedEmployees,
     selectedTimeRange,
     setSelectedTimeRange,
-}) => {
+}: NavBarProps) => {
     const handleSidebar = () => setOpenSidebar(!openSidebar);
 
     return (

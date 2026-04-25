@@ -1,35 +1,11 @@
 import { useState, useEffect } from "react";
 import { getData, postData } from "../services/apiService";
 
-import NavBar from "../components/NavBar";
+import NavBar from "../components/nav/NavBar";
 import AnalyticsPanel from "../components/analytics/AnalyticsPanel";
 import { getDateRange } from "../utils/dateRangeHelper";
 import Chat from "../components/chat/Chat";
-
-export type FiltersType = {
-    employeeIds: "all" | string[];
-    timeRange: string;
-};
-
-export type Log = {
-    employeeId: string,
-    date: string,
-    mood: number,
-    hoursOnline: number,
-    tasksCompleted: number,
-    meetings: number
-}
-
-type AIResponse = {
-    summary: string;
-    insights: string[];
-    risk_level: "low" | "medium" | "high";
-};
-  
-export type Message = {
-    query: string;
-    response: AIResponse | null;
- };
+import type { AIResponse, FiltersType, Log, Message } from "../types";
 
 function HomePage() {
     const [search, setSearch] = useState<string>("");

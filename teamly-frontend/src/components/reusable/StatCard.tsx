@@ -1,7 +1,9 @@
+import type { StatCardProps } from "../../types"
+
 const StatCard = ({
     title,
     stat,
-}) => {
+}: StatCardProps) => {
     return (
         <div className="w-full flex items-center justify-evenly flex-col h-28 rounded-xl bg-purple-800/10 p-4 border border-purple-950/15 shadow-sm/15">
             <h1 className="text-sm font-light">
