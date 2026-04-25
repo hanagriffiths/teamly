@@ -13,7 +13,7 @@ export type FiltersProps = {
     allOptionTitle: string,
     options: Constants[],
     selectedOption: string | string[],
-    setSelectedOption: React.Dispatch<React.SetStateAction<string[] | string>>,
+    setSelectedOption: React.Dispatch<React.SetStateAction<string[]>> | React.Dispatch<React.SetStateAction<string>>,
 }
 
 export type Log = {
@@ -59,7 +59,7 @@ export type AnalyticsProps = {
 export type ChatProps = {
     loading: boolean,
     messages: Message[],
-    handleSubmit: () => void,
+    handleSubmit: (e: React.SyntheticEvent<HTMLFormElement>) => Promise<void>,
     search: string,
     setSearch: React.Dispatch<React.SetStateAction<string>>,
 }

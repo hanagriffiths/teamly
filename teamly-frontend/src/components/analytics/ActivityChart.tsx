@@ -33,7 +33,7 @@ export function ActivityBarChart({ logs }: ChartProps) {
           <YAxis width={40} />
           <Tooltip
             formatter={(
-              value: number | undefined,
+              value: number | string,
               name: string,
               props: any
             ) => [

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import type { Message } from "../../types";
+import type { ChatProps } from "../../types";
 
 const Chat = ({
     loading,
@@ -8,7 +9,7 @@ const Chat = ({
     handleSubmit,
     search,
     setSearch,
-}) => {
+}: ChatProps) => {
     const bottomRef = useRef<HTMLDivElement | null>(null);
         useEffect(() => {
         bottomRef.current?.scrollIntoView({ behavior: "smooth" });

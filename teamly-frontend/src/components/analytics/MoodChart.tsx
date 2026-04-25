@@ -32,7 +32,7 @@ function MoodChart({ logs }: ChartProps) {
                     <XAxis dataKey="date" />
                     <YAxis domain={[0, 10]} width={30} />
                     <Tooltip
-                        formatter={(value: string | undefined, name: string) => [
+                        formatter={(value: number | string, name: string) => [
                             value,
                             employeeMap[name as string] || name
                         ]}

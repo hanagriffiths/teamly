@@ -1,6 +1,6 @@
 import api from "./apiClient";
 
-const postData = async (endpoint, data) => {
+const postData = async (endpoint: string, data: object) => {
     try {
         const res = await api.post(endpoint, data);
         return res.data;
@@ -10,7 +10,7 @@ const postData = async (endpoint, data) => {
     }
 };
 
-const getData = async (endpoint) => {
+const getData = async (endpoint: string) => {
     try {
         const res = await api.get(endpoint);
         return res.data;
