@@ -1,9 +1,9 @@
-import { employees } from "../constants/employees"
-import { timeRanges } from "../constants/timeRanges";
-import { getSummaryStats } from "../utils/summaryStats";
+import { employees } from "../../constants/employees"
+import { timeRanges } from "../../constants/timeRanges";
+import { getSummaryStats } from "../../utils/summaryStats";
 import { ActivityBarChart } from "./ActivityChart";
 import MoodChart from "./MoodChart";
-import StatCard from "./reusable/StatCard";
+import StatCard from "../reusable/StatCard";
 
 const AnalyticsPanel = ({
     selectedEmployees,
@@ -35,9 +35,9 @@ const AnalyticsPanel = ({
 
     return (
         <div
-            className="flex-3 overflow-y-auto bg-indigo-100/50 border-l border-purple-950/20 text-purple-950"
+            className="flex-3 min-h-0 overflow-y-auto bg-indigo-100/50 border-l border-purple-950/20 text-purple-950"
         >
-            <div className="w-full flex flex-col gap-6 items-center py-8 px-10">
+            <div className="w-full flex-1 min-h-0 overflow-y-auto flex flex-col gap-6 items-center py-8 px-10">
                 <div className="w-full space-y-1.5 px-4 py-3 bg-purple-800/5 rounded-xl">
                     <h1 className="text-[22px] font-medium">
                         Employee Overview
@@ -79,7 +79,8 @@ const AnalyticsPanel = ({
                     <MoodChart logs={logs} />
                 </div>
 
-                <div className="w-full flex flex-col gap-2 pt-8">
+                {/* <div className="w-full flex flex-col gap-2 pt-8"> */}
+                <div className="w-full flex flex-col gap-2 pt-8 flex-1 min-h-0 overflow-y-auto">
                     <h1 className="w-full text-center italic underline underline-offset-2 text-lg">
                         Activity Summary
                     </h1>

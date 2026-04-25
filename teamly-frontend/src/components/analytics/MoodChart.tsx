@@ -7,8 +7,8 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-import { getMoodOverTime } from "../utils/moodOverTime";
-import { employees } from "../constants/employees";
+import { getMoodOverTime } from "../../utils/moodOverTime";
+import { employees } from "../../constants/employees";
 
 const COLOURS = ["#8884d8", "#2791F5", "#ff7f7f"];
 
@@ -22,8 +22,8 @@ function MoodChart({ logs }) {
     );
 
     return (
-        <div className="w-full h-[300px] text-xs">
-            <ResponsiveContainer minWidth={0} width="100%" height="100%">
+        <div className="w-full h-[300px] min-h-0 text-xs">
+            <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 100, height: 50 }}>
                 <LineChart
                     data={data}
                     margin={{ top: 10, right: 20, left: 0, bottom: 0 }}

@@ -1,5 +1,3 @@
-
-
 const StatCard = ({
     title,
     stat,
@@ -10,7 +8,7 @@ const StatCard = ({
                 {title}
             </h1>
             <h1 className="text-3xl font-bold">
-                {stat.toString()}
+                {stat ? stat.toString() : "-"}
             </h1>
         </div>
     )

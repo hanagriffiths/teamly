@@ -6,8 +6,8 @@ import {
     Tooltip,
     ResponsiveContainer,
 } from "recharts";
-import { employees } from "../constants/employees";
-import { getActivityPerEmployee } from "../utils/activityOverTime";
+import { employees } from "../../constants/employees";
+import { getActivityPerEmployee } from "../../utils/activityOverTime";
   
 export function ActivityBarChart({ logs }) {
   const data = getActivityPerEmployee(logs);
@@ -17,8 +17,8 @@ export function ActivityBarChart({ logs }) {
   );
 
   return (
-    <div className="w-full h-[300px] text-xs">
-      <ResponsiveContainer width="100%" height="100%">
+    <div className="w-full h-[300px] min-h-[300px] text-xs">
+      <ResponsiveContainer width="100%" height="100%" initialDimension={{ width: 100, height: 50 }}>
         <BarChart
           data={data}
           margin={{ top: 10, right: 20, left: 0, bottom: 0 }}

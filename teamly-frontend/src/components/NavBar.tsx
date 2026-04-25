@@ -55,7 +55,7 @@ const NavBar = ({
                         </button>
 
                         <div className="p-2">
-                            <h1 className="underline underline-offset-2">
+                            <h1 className="text-sm underline underline-offset-2">
                                 Filters:
                             </h1>
 

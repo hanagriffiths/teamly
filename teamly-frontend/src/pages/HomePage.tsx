@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { getData } from "../../services/apiService";
+import { getData } from "../services/apiService";
 import { FaCircleArrowRight } from "react-icons/fa6";
 
-import NavBar from "../../components/NavBar";
-import AnalyticsPanel from "../../components/AnalyticsPanel";
-import { getDateRange } from "../../utils/dateRangeHelper";
+import NavBar from "../components/NavBar";
+import AnalyticsPanel from "../components/analytics/AnalyticsPanel";
+import { getDateRange } from "../utils/dateRangeHelper";
 
 export type FiltersType = {
     employeeIds: "all" | string[];
@@ -110,7 +110,7 @@ function HomePage() {
                     className="relative flex-5 min-h-dvh items-start bg-blue-100/40"
                 >
                     {messages.length > 0 ? (
-                        <div className="w-full max-w-3xl mx-auto mt-30 px-4 flex flex-col gap-3">
+                        <div className="w-full max-w-3xl mx-auto mt-30 px-12 flex flex-col gap-3">
                             {messages.map((msg, index) => (
                                 <div
                                     key={index}

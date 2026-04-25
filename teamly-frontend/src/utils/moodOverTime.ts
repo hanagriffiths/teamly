@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import type { Log } from "../pages/home/HomePage";
+import type { Log } from "../pages/HomePage";
 
 export function getMoodOverTime(logs: Log[]) {
   const grouped = {};

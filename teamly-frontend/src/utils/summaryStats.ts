@@ -1,4 +1,4 @@
-import type { Log } from "../pages/home/HomePage";
+import type { Log } from "../pages/HomePage";
 
 export function getSummaryStats(logs: Log[]) {
     const totalEmployees = new Set(logs.map(log => log.employeeId)).size;

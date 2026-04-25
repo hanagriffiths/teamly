@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
 import { timeRanges } from '../constants/timeRanges';
-import type { FiltersType } from '../pages/home/HomePage';
+import type { FiltersType } from '../pages/HomePage';
 
 export function getDateRange(timeRange: FiltersType['timeRange']) {
     const now = dayjs("2026-04-14");
