@@ -12,7 +12,7 @@ app.use(express.json());
 
 // CORS security policy
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:4173"],    // for DEV and BUILD
+  origin: ["http://localhost:5173", "http://localhost:4173", "https://teamly-beige.vercel.app/"],
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: true
