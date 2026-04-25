@@ -20,11 +20,11 @@ const Chat = ({
             className="flex flex-5 flex-col h-dvh bg-blue-100/40"
         >
             {messages.length > 0 ? (
-                <div className="flex-1 overflow-y-auto w-full max-w-3xl mx-auto mt-10 px-12 pb-8">
+                <div className="flex-1 overflow-y-auto hide-scrollbar w-full max-w-4xl mx-auto mt-10 px-12 pb-8">
                     {messages.map((msg: Message, index: number) => (
                         <div
                             key={index}
-                            className="relative space-y-8 py-4"
+                            className="w-full space-y-8 py-4"
                         >
                             <div className="w-full flex justify-end">
                                 <p className="max-w-[50%] px-4 py-2 text-wrap bg-purple-200 text-purple-900 rounded-2xl">
@@ -39,14 +39,18 @@ const Chat = ({
                                     </h1>
                                     <p>{msg.response.summary}</p>
 
-                                    <h1 className="font-semibold text-2xl">
-                                        🔑 Key Insights
-                                    </h1>
-                                    <ul className="list-disc ml-4 space-y-2">
-                                        {msg.response.insights.map((insight, idx) => (
-                                            <li key={idx}>{insight}</li>
-                                        ))}
-                                    </ul>
+                                    {msg.response.insights.length > 0 && 
+                                        <>
+                                            <h1 className="font-semibold text-2xl">
+                                                🔑 Key Insights
+                                            </h1>
+                                            <ul className="list-disc ml-4 space-y-2">
+                                                {msg.response.insights.map((insight, idx) => (
+                                                    <li key={idx}>{insight}</li>
+                                                ))}
+                                            </ul>
+                                        </>
+                                    }
 
                                     <span ref={bottomRef} className="text-sm">
                                         Risk: {msg.response.risk_level}
