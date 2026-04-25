@@ -2,18 +2,6 @@ import { useEffect, useRef } from "react";
 import { FaCircleArrowRight } from "react-icons/fa6";
 import type { Message } from "../../pages/HomePage";
 
-const TypingDots = () => {
-    return (
-        <div
-            className="w-fit h-fit rounded-xl p-3 text-sm flex flex-row items-center gap-2"
-        >
-            <div className="size-2 bg-night-sky/75 rounded-full animate-bounce [animation-delay:-0.3s]" />
-            <div className="size-2 bg-night-sky/75 rounded-full animate-bounce [animation-delay:-0.15s]" />
-            <div className="size-2 bg-night-sky/75 rounded-full animate-bounce" />
-        </div>
-    )
-};
-
 const Chat = ({
     loading,
     messages,
@@ -64,7 +52,13 @@ const Chat = ({
                                     </span>
                                 </div>
                             ) : (
-                                <p>Thinking...</p>
+                                <div
+                                    className="w-fit h-fit rounded-xl p-3 text-sm flex flex-row items-center gap-2"
+                                >
+                                    <div className="size-2 bg-purple-900/75 rounded-full animate-bounce [animation-delay:-0.3s]" />
+                                    <div className="size-2 bg-purple-900/75 rounded-full animate-bounce [animation-delay:-0.15s]" />
+                                    <div className="size-2 bg-purple-900/75 rounded-full animate-bounce" />
+                                </div>
                             )}
                         </div>
                     ))}
