@@ -1,45 +1,19 @@
-import type { FiltersProps } from "../../types";
+import type { FilterTimeProps, FilterEmpProps } from "../../types";
+import { employees } from "../../constants/employees";
+import { timeRanges } from "../../constants/timeRanges";
 
-const Filters = ({
-    title,
-    allOptionTitle,
-    options,
-    selectedOption,
-    setSelectedOption,
-}: FiltersProps) => {
-    const toggleOption = (id: string) => {
-        // for time ranges, don't allow multi-select option
-        if (id[0] === "t") {
-            setSelectedOption(id);
-            return;
-        }
-
-        if (selectedOption === "all") {
-            setSelectedOption([id]);
-            return;
-        }
-
-        // remove selection on double click
-        // otherwise add to array
-        // if this resets the selection to zero, default back to all
-        if (typeof selectedOption === "object" && selectedOption.includes(id)) {
-            const updated = selectedOption.filter(e => e !== id);
-            setSelectedOption(updated.length ? updated : "all");
-        } else {
-            setSelectedOption([...selectedOption, id]);
-        }
-
-        console.log(selectedOption);
-    };
-    
+export const FilterTime = ({
+    selectedTimeRange,
+    setSelectedTimeRange,
+}: FilterTimeProps) => {
     const selectAll = () => {
-        setSelectedOption("all");
+        setSelectedTimeRange("all");
     };
 
     return (
         <div className="w-full p-2 flex flex-col gap-2">
             <h1 className="text-sm italic">
-                {title}
+                Time Ranges:
             </h1>
 
             <div className="flex flex-col gap-1 text-sm">
@@ -50,25 +24,25 @@ const Filters = ({
                     <div
                         className={`
                             w-4 h-4 rounded-full border flex items-center justify-center
-                            ${selectedOption === "all" ? "border-indigo-500" : "border-gray-400"}
+                            ${selectedTimeRange === "all" ? "border-indigo-500" : "border-gray-400"}
                         `}
                     >
-                        {selectedOption === "all" && (
+                        {selectedTimeRange === "all" && (
                             <div className="w-2 h-2 rounded-full bg-indigo-500" />
                         )}
                     </div>
-                    <span>{allOptionTitle}</span>
+                    <span>All Time</span>
                 </div>
 
-                {options.map(option => {
+                {timeRanges.map(range => {
                     const isSelected =
-                    selectedOption !== "all" &&
-                    selectedOption.includes(option.id);
+                    selectedTimeRange !== "all" &&
+                    selectedTimeRange.includes(range.id);
 
                     return (
                         <div
-                            key={option.id}
-                            onClick={() => toggleOption(option.id)}
+                            key={range.id}
+                            onClick={() => setSelectedTimeRange(range.id)}
                             className="flex items-center gap-2 cursor-pointer"
                         >
                             <div className={`w-4 h-4 rounded-full border flex items-center justify-center
@@ -78,7 +52,7 @@ const Filters = ({
                                 <div className="w-2 h-2 rounded-full bg-blue-500" />
                             )}
                             </div>
-                            <span>{option.name}</span>
+                            <span>{range.name}</span>
                         </div>
                     );
                 })}
@@ -87,4 +61,79 @@ const Filters = ({
     )
 }
 
-export default Filters;
+
+export const FilterEmp = ({
+    selectedEmployee,
+    setSelectedEmployee,
+}: FilterEmpProps) => {
+    const toggleOption = (id: string) => {
+        if (selectedEmployee === "all") {
+            setSelectedEmployee([id]);
+            return;
+        }
+
+        // remove selection on double click
+        // otherwise add to array
+        // if this resets the selection to zero, default back to all
+        if (typeof selectedEmployee === "object" && selectedEmployee.includes(id)) {
+            const updated = selectedEmployee.filter(e => e !== id);
+            setSelectedEmployee(updated.length ? updated : "all");
+        } else {
+            setSelectedEmployee([...selectedEmployee, id]);
+        }
+    };
+    
+    const selectAll = () => {
+        setSelectedEmployee("all");
+    };
+
+    return (
+        <div className="w-full p-2 flex flex-col gap-2">
+            <h1 className="text-sm italic">
+                Employees:
+            </h1>
+
+            <div className="flex flex-col gap-1 text-sm">
+                <div
+                    onClick={selectAll}
+                    className="flex items-center gap-2 cursor-pointer"
+                >
+                    <div
+                        className={`
+                            w-4 h-4 rounded-full border flex items-center justify-center
+                            ${selectedEmployee === "all" ? "border-indigo-500" : "border-gray-400"}
+                        `}
+                    >
+                        {selectedEmployee === "all" && (
+                            <div className="w-2 h-2 rounded-full bg-indigo-500" />
+                        )}
+                    </div>
+                    <span>All Employees</span>
+                </div>
+
+                {employees.map(emp => {
+                    const isSelected =
+                    selectedEmployee !== "all" &&
+                    selectedEmployee.includes(emp.id);
+
+                    return (
+                        <div
+                            key={emp.id}
+                            onClick={() => toggleOption(emp.id)}
+                            className="flex items-center gap-2 cursor-pointer"
+                        >
+                            <div className={`w-4 h-4 rounded-full border flex items-center justify-center
+                            ${isSelected ? "border-blue-500" : "border-gray-400"}`}
+                            >
+                            {isSelected && (
+                                <div className="w-2 h-2 rounded-full bg-blue-500" />
+                            )}
+                            </div>
+                            <span>{emp.name}</span>
+                        </div>
+                    );
+                })}
+            </div>
+        </div>
+    )
+}

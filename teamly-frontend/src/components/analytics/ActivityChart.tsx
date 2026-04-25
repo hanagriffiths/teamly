@@ -33,16 +33,20 @@ export function ActivityBarChart({ logs }: ChartProps) {
           <YAxis width={40} />
           <Tooltip
             formatter={(
-              value: number | string | undefined,
-              name: string,
+              value: unknown,
+              name: unknown,
               props: any
             ): [string | number, string] => {
               const safeValue =
-                value === undefined ? "-" : value;
-          
+                typeof value === "number" || typeof value === "string"
+                  ? value
+                  : "-";
+
+              const safeName = typeof name === "string" ? name : "unknown";
+
               return [
                 safeValue,
-                employeeMap[props?.payload?.employeeId] || name
+                employeeMap?.[props?.payload?.employeeId] || safeName
               ];
             }}
           />

@@ -12,7 +12,7 @@ function HomePage() {
     const [messages, setMessages] = useState<Message[]>([]);
     const [openSidebar, setOpenSidebar] = useState<boolean>(false);
     const [loading, setLoading] = useState<boolean>(false);
-    const [selectedEmployees, setSelectedEmployees] = useState<"all" | string[]>("all");
+    const [selectedEmployees, setSelectedEmployees] = useState<string | string[]>("all");
     const [selectedTimeRange, setSelectedTimeRange] = useState<string>("all");
     const [logs, setLogs] = useState<Log[]>([]);
 
@@ -42,7 +42,7 @@ function HomePage() {
 
             if (employeeIdsState === "all") {
                 employeeIds = "all";
-            } else if (employeeIdsState.length > 0) {
+            } else if (typeof employeeIdsState === "object" && employeeIdsState.length > 0) {
                 employeeIds = employeeIdsState.join(",");
             } else {
                 employeeIds = "all";

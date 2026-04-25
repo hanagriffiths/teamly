@@ -3,9 +3,7 @@ import { teamlyIcon } from "../../assets/images";
 import { PiNotePencilThin } from "react-icons/pi";
 import { TbCircleLetterTFilled } from "react-icons/tb";
 
-import Filters from "../reusable/Filters";
-import { employees } from "../../constants/employees";
-import { timeRanges } from "../../constants/timeRanges";
+import { FilterEmp, FilterTime } from "../reusable/Filters";
 import type { NavBarProps } from "../../types";
 
 const NavBar = ({
@@ -60,21 +58,15 @@ const NavBar = ({
                             </h1>
 
                             {/* employee selection */}
-                            <Filters
-                                title="Employees:"
-                                allOptionTitle="All Employees"
-                                options={employees}
-                                selectedOption={selectedEmployees}
-                                setSelectedOption={setSelectedEmployees}
+                            <FilterEmp
+                                selectedEmployee={selectedEmployees}
+                                setSelectedEmployee={setSelectedEmployees}
                             />
 
                             {/* time range selection */}
-                            <Filters
-                                title="Time Ranges:"
-                                allOptionTitle="All Time"
-                                options={timeRanges}
-                                selectedOption={selectedTimeRange}
-                                setSelectedOption={setSelectedTimeRange}
+                            <FilterTime
+                                selectedTimeRange={selectedTimeRange}
+                                setSelectedTimeRange={setSelectedTimeRange}
                             />
                         </div>
                     </div>

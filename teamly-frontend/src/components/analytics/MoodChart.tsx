@@ -32,17 +32,22 @@ function MoodChart({ logs }: ChartProps) {
                     <XAxis dataKey="date" />
                     <YAxis domain={[0, 10]} width={30} />
                     <Tooltip
-                        // formatter={(value: number | string, name: string) => [
-                        //     value,
-                        //     employeeMap[name as string] || name
-                        // ]}
                         formatter={(
-                            value: number | string | undefined,
-                            name: string
-                          ): [string | number, string] => [
-                            value,
-                            employeeMap[name as string] || name
-                        ]}
+                            value: unknown,
+                            name: unknown
+                        ): [string | number, string] => {
+                            const safeValue =
+                              typeof value === "number" || typeof value === "string"
+                                ? value
+                                : "-";
+              
+                            const safeName = typeof name === "string" ? name : "unknown";
+              
+                            return [
+                                safeValue,
+                                employeeMap[safeName as string] || safeName
+                            ];
+                        }}
                     />
                     <Legend formatter={(value) => employeeMap[value] || value} />
 

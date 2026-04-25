@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
-import type { Log } from "../pages/HomePage";
+import type { Grouped, Log } from "../types";
+
 
 export function getMoodOverTime(logs: Log[]) {
-  const grouped = {};
+  const grouped: Grouped = {};
 
   logs.forEach(log => {
     const date = dayjs(log.date).format("DD/MM");
