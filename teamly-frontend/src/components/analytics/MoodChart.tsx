@@ -31,14 +31,14 @@ function MoodChart({ logs }) {
                     <XAxis dataKey="date" />
                     <YAxis domain={[0, 10]} width={30} />
                     <Tooltip
-                        formatter={(value, name) => [
+                        formatter={(value: string, name: string) => [
                             value,
                             employeeMap[name as string] || name
                         ]}
                     />
                     <Legend formatter={(value) => employeeMap[value] || value} />
 
-                    {employeeIds.map((id, index) => (
+                    {employeeIds.map((id: string, index: number) => (
                         <Line
                             key={id}
                             type="monotone"
