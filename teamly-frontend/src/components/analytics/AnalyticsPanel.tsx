@@ -84,6 +84,7 @@ const AnalyticsPanel = ({
                     <h1 className="w-full text-center italic underline underline-offset-2 text-lg">
                         Activity Summary
                     </h1>
+                    <p className="w-full text-sm italic text-center opacity-50">(meetings and tasks completed)</p>
 
                     <ActivityBarChart logs={logs} />
                 </div>

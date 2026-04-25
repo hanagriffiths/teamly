@@ -19,8 +19,8 @@ app.use(cors({
 }));
 
 // Routes
-app.use("/api", aiRoutes);
-app.use("/data", dataRoutes);
+app.use("/api/ai", aiRoutes);
+app.use("/api/data", dataRoutes);
 
 // Health check
 app.get("/health", (_req, res) => {

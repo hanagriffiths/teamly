@@ -17,8 +17,9 @@ export const hrAnalyticsPrompt = ChatPromptTemplate.fromTemplate(`
 
     Rules:
     - Be concise and base answers strictly on provided data.
-    - "insights" must be 3–7 concise bullet-style strings (no newlines).
+    - "insights" must be 3–5 concise bullet-style strings (no newlines).
     - If the question cannot be answered from DATA, set "summary" to a brief explanation, set "insights" to [], and set "risk_level" to "low".
     - Do not include any additional keys.
     - If data is insufficient, say so clearly and avoid over-speculating.
+    - Always prioritise continuity with the previous answer when responding to follow-up questions.
 `)

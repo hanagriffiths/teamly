@@ -4,8 +4,6 @@ import { logToText } from "../../utils/logToText";
 import { getEmbedding, getEmbeddings } from "../embedding/embedding";
 import { cosineSimilarity } from "../../utils/cosineSimilarity";
 
-const K = 5;
-
 export async function buildLogRetriever(filteredLogs: Log[]) {
     if (filteredLogs.length === 0) {
         throw new Error("No matching logs for the given query/date range.");
@@ -43,7 +41,6 @@ export async function buildLogRetriever(filteredLogs: Log[]) {
 
             return ranked
                 .sort((a, b) => b.score - a.score)
-                .slice(0, K)
                 .map((item) => item.document);
         },
     };
