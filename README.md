@@ -29,21 +29,15 @@ Teamly solves this by allowing users to ask natural language questions such as:
   - Key insights
   - Risk level (low / medium / high)
 
----
-
 ### Retrieval-Augmented Generation (RAG)
 - Employee logs are converted into embeddings using OpenAI
 - Vector similarity search retrieves relevant context
 - Claude generates grounded responses based on retrieved data
 
----
-
 ### Context-Aware Conversations
 - Maintains conversational context within a session
 - Supports follow-up queries (e.g. “What about this week?”)
 - Backend memory enables continuity across interactions
-
----
 
 ### Data Visualisation
 - Interactive charts built with Recharts:
@@ -51,13 +45,11 @@ Teamly solves this by allowing users to ask natural language questions such as:
   - Activity trends
 - Filters dynamically update visual analytics
 
----
-
 ### Smart Filtering System
 - Filter by:
   - Employee(s)
   - Time range (powered by DayJS)
-- Filters are used to update the insights
+- Filters are used to update the insights only
 
 ---
 
@@ -73,8 +65,6 @@ Teamly solves this by allowing users to ask natural language questions such as:
 - Zod (schema validation)
 - DayJS (date handling & filtering)
 - In-memory vector store (custom implementation)
-
----
 
 ### Frontend
 - React (Vite)
