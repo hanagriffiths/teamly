@@ -40,7 +40,7 @@ const AnalyticsPanel = ({
             <div className="w-full flex-1 min-h-0 overflow-y-auto flex flex-col gap-6 items-center py-8 px-10">
                 <div className="w-full space-y-1.5 px-4 py-3 bg-purple-800/5 rounded-xl">
                     <h1 className="text-[22px] font-medium">
-                        Employee Overview
+                        Employee Insights
                     </h1>
 
                     <p className="text-[13px] opacity-80">

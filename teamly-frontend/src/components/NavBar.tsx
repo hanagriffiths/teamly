@@ -56,7 +56,7 @@ const NavBar = ({
 
                         <div className="p-2">
                             <h1 className="text-sm underline underline-offset-2">
-                                Filters:
+                                Insights Filters:
                             </h1>
 
                             {/* employee selection */}
