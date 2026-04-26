@@ -77,3 +77,8 @@ Teamly solves this by allowing users to ask natural language questions such as:
 ## AI Architecture
 
 Teamly uses a lightweight RAG pipeline:
+
+---
+
+## Demo
+Find the deployed version of Teamly here: https://teamly-beige.vercel.app/
